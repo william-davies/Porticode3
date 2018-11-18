@@ -1,0 +1,23 @@
+{% extends "dashboard/base/base_content.html" %}
+
+{% block content %}
+    <div class="container pt-section">
+        <h3 style="text-align: center;">Current Balance: £128.81</h3>
+        <h5 style="text-align: center;">Most recent transactions</h5>
+        {% for date, transactions_data in dates_data %}
+            <div class="pb-5">
+                <h3>{{ date|date:"M d, Y" }}</h3>
+                {% for transaction_partner, amount in transactions_data %}
+                    <div class="row">
+                    <div class="col">
+                        <span>{{ transaction_partner }}</span>
+                    </div>
+                    <div class="col text-right">
+                        <span {% if amount.0 == '+' %}style="color:green;"{% endif %}>{{ amount }}</span>
+                    </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
